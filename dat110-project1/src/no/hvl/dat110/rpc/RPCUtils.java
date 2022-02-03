@@ -1,6 +1,8 @@
 package no.hvl.dat110.rpc;
 
+import java.io.UnsupportedEncodingException;
 import java.nio.ByteBuffer;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import no.hvl.dat110.TODO;
 
@@ -13,9 +15,11 @@ public class RPCUtils {
 		// TODO - START
 		
 		// Encapsulate the rpcid and payload in a byte array according to the  RPC message syntax
-		
-		if (true)
-			throw new UnsupportedOperationException(TODO.method());
+		rpcmsg = new byte[128];
+		rpcmsg[0] = rpcid;
+		for(int i = 0; i < payload.length; i++){
+			rpcmsg[i+1] = payload[i];
+		}
 		
 		// TODO - END
 		
@@ -29,9 +33,7 @@ public class RPCUtils {
 		// TODO - START
 		
 		// Decapsulate the rpcid and payload in a byte array according to the  RPC message syntax
-		
-		if (true)
-			throw new UnsupportedOperationException(TODO.method());
+		payload = Arrays.copyOfRange(rpcmsg, 1, rpcmsg.length);
 		
 		// TODO - END
 		
@@ -44,9 +46,8 @@ public class RPCUtils {
 		byte[] encoded = null;
 		
 		// TODO - START 
-		
-		if (true)
-			throw new UnsupportedOperationException(TODO.method());
+
+		encoded = str.getBytes(StandardCharsets.UTF_8);
 		
 		// TODO - END
 		
@@ -58,10 +59,13 @@ public class RPCUtils {
 		String decoded = null; 
 		
 		// TODO - START 
-		
-		if (true)
-			throw new UnsupportedOperationException(TODO.method());
-		
+
+		try {
+			decoded = new String(data, "UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+
 		// TODO - END
 		
 		return decoded;
@@ -117,8 +121,7 @@ public class RPCUtils {
 		
 		// TODO - START 
 		
-		if (true)
-			throw new UnsupportedOperationException(TODO.method());
+		encoded = ByteBuffer.allocate(4).putInt(x).array();
 		
 		// TODO - END
 		
@@ -132,8 +135,7 @@ public class RPCUtils {
 		
 		// TODO - START 
 		
-		if (true)
-			throw new UnsupportedOperationException(TODO.method());
+		decoded = ByteBuffer.wrap(data).getInt();
 		
 		// TODO - END
 		

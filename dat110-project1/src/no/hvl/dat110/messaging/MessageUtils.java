@@ -23,7 +23,7 @@ public class MessageUtils {
 
 		segment = new byte[SEGMENTSIZE];
 		data = message.getData();
-		segment[0] = (byte)data.length;
+		segment[0] = (byte)data.length; //feil?
 		for(int i = 0; i < data.length; i++){
 			segment[i+1] = data[i];
 		}
@@ -40,8 +40,8 @@ public class MessageUtils {
 		// TODO - START
 		// decapsulate segment and put received data into a message
 
-		int msgLength = segment[0];
-		byte[] newSegment = new byte[msgLength];
+		int msgLength = segment[0];//feil?
+		byte[] newSegment = new byte[msgLength];//feil?
 
 		for(int i = 0; i < msgLength; i++){
 			newSegment[i] = segment[i+1];
