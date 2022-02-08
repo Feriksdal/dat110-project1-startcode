@@ -39,18 +39,17 @@ public class RPCServer {
 	    
 		   byte rpcid = 0;
 		   Message requestmsg,replymsg;
-		   
-		   // TODO - START
+
 		   // - receive Message containing RPC request
 		   // - find the identifier for the RPC method to invoke
 		   // - lookup the method to be invoked
 		   // - invoke the method
 		   // - send back message containing RPC reply
-			
-		   if (true)
-				throw new UnsupportedOperationException(TODO.method());
-		   
-		   // TODO - END
+			requestmsg = connection.receive();
+			byte[] bytes = requestmsg.getData();
+			rpcid = bytes[0];
+			replymsg = new Message(services.get(rpcid).invoke(requestmsg.getData()));
+			connection.send(replymsg);
 		   
 		   if (rpcid == RPCCommon.RPIDSTOP) {
 			   stop = true;

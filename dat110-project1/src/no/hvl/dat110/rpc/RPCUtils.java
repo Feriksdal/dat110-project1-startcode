@@ -58,13 +58,10 @@ public class RPCUtils {
 		
 		String decoded = null; 
 		
-		// TODO - START 
+		// TODO - START
 
-		try {
-			decoded = new String(data, "UTF-8");
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		}
+		decoded = new String(Arrays.copyOf(data,data.length));
+
 
 		// TODO - END
 		
@@ -75,11 +72,8 @@ public class RPCUtils {
 		
 		byte[] encoded = null;
 		
-		// TODO - START 
-		
-		if (true)
-			throw new UnsupportedOperationException(TODO.method());
-				
+		// TODO - START
+		encoded = new byte[0];
 		// TODO - END
 		
 		return encoded;
@@ -89,10 +83,7 @@ public class RPCUtils {
 	public static void unmarshallVoid(byte[] data) {
 		
 		// TODO
-		
-		if (true)
-			throw new UnsupportedOperationException(TODO.method());
-		
+		return;
 	}
 	
 	public static byte[] marshallBoolean(boolean b) {
