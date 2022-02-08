@@ -60,11 +60,7 @@ public class RPCUtils {
 		
 		// TODO - START 
 
-		try {
-			decoded = new String(data, "UTF-8");
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		}
+		decoded = new String(Arrays.copyOf(data, data.length));
 
 		// TODO - END
 		
@@ -77,8 +73,7 @@ public class RPCUtils {
 		
 		// TODO - START 
 		
-		if (true)
-			throw new UnsupportedOperationException(TODO.method());
+		encoded = new byte[0];
 				
 		// TODO - END
 		
@@ -90,8 +85,7 @@ public class RPCUtils {
 		
 		// TODO
 		
-		if (true)
-			throw new UnsupportedOperationException(TODO.method());
+		return;
 		
 	}
 	
