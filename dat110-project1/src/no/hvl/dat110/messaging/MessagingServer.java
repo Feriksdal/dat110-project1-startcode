@@ -31,6 +31,7 @@ public class MessagingServer {
 		// TODO - START
 		// accept TCP connection on welcome socket and create connection
 
+		//Sannsynligvis her feilen er
 		try {
 			connection = new Connection(welcomeSocket.accept());
 		} catch (IOException e) {

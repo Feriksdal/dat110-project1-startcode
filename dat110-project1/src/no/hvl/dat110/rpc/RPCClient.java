@@ -37,7 +37,6 @@ public class RPCClient {
 		byte[] returnval = null;
 		
 		// TODO - START
-
 		connection.send(new Message(params));
 		returnval = connection.receive().getData();
 
