@@ -8,6 +8,8 @@ import java.net.Socket;
 
 import no.hvl.dat110.TODO;
 
+import static no.hvl.dat110.messaging.MessageUtils.SEGMENTSIZE;
+
 
 public class Connection {
 
@@ -39,7 +41,6 @@ public class Connection {
 		// TODO - START
 		// encapsulate the data contained in the message and write to the output stream
 
-		MessageUtils msgUtils;
 		data = MessageUtils.encapsulate(message);
 
 		try {
@@ -59,14 +60,16 @@ public class Connection {
 	public Message receive() {
 
 		Message message = null;
-		byte[] data;
+		byte[] data = new byte[SEGMENTSIZE];
 
 		// TODO - START
 		// read a segment from the input stream and decapsulate into message
 
 		try {
-			data = MessageUtils.decapsulate(inStream.readAllBytes()).getData();
-			message = new Message(data);
+			data = inStream.readNBytes(SEGMENTSIZE);
+			message = MessageUtils.decapsulate(data);
+//			data = MessageUtils.decapsulate(inStream.readAllBytes()).getData();
+//			message = new Message(data);
 		} catch (IOException ex){
 
 			System.out.println("Connection: " + ex.getMessage());

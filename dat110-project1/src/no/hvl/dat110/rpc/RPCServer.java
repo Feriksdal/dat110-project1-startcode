@@ -5,6 +5,7 @@ import java.util.HashMap;
 import no.hvl.dat110.TODO;
 import no.hvl.dat110.messaging.Connection;
 import no.hvl.dat110.messaging.Message;
+import no.hvl.dat110.messaging.MessageUtils;
 import no.hvl.dat110.messaging.MessagingServer;
 
 public class RPCServer {
@@ -48,10 +49,20 @@ public class RPCServer {
 		   // - send back message containing RPC reply
 
 			requestmsg = connection.receive();
-			rpcid = requestmsg.getData()[0];
-			replymsg = new Message(services.get(rpcid).invoke(requestmsg.getData()));
-			connection.send(replymsg);
-			
+
+			byte[] msg = requestmsg.getData();
+			rpcid = msg[0];
+			RPCRemoteImpl method = services.get(rpcid);
+			if(method == null){
+				byte[] emptyData = new byte[0];
+				replymsg = new Message(emptyData);
+				connection.send(replymsg);
+			} else {
+				byte[] input = RPCUtils.decapsulate(requestmsg.getData());
+				byte[] result = method.invoke(input);
+				replymsg = new Message(RPCUtils.encapsulate(rpcid, result));
+				connection.send(replymsg);
+			}
 
 		   // TODO - END
 		   
