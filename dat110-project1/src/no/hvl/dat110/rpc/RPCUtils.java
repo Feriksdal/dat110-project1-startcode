@@ -33,7 +33,12 @@ public class RPCUtils {
 		// TODO - START
 		
 		// Decapsulate the rpcid and payload in a byte array according to the  RPC message syntax
-		payload = Arrays.copyOfRange(rpcmsg, 1, rpcmsg.length);
+		int msgLength = rpcmsg.length-1;
+		payload = new byte[msgLength];
+
+		for(int i = 0; i < msgLength; i++){
+			payload[i] = rpcmsg[i+1];
+		}
 		
 		// TODO - END
 		
