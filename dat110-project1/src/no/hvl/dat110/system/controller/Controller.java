@@ -4,6 +4,8 @@ import no.hvl.dat110.TODO;
 import no.hvl.dat110.rpc.RPCClient;
 import no.hvl.dat110.rpc.RPCClientStopStub;
 
+import static java.lang.Thread.sleep;
+
 public class Controller  {
 	
 	private static int N = 5;
@@ -36,6 +38,11 @@ public class Controller  {
 		sensorclient.connect();
 		for(int i = 0; i < N; i++){
 			display.write(Integer.toString(sensor.read()));
+			try {
+				sleep(1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 		}
 
 		// TODO - END
